@@ -27,8 +27,9 @@ WORKDIR /var/www/html/
 
 # Clear cache
 # RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-Install extensions for php
 
+# Install extensions for php
+# RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install gd
 
@@ -37,6 +38,12 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Copy existing application directory contents to the working directory
 COPY . /var/www/html
+
+# Assign permissions of the working directory to the www-data user
+RUN chown -R www-data:www-data \
+        /var/www/html/storage \
+        /var/www/html/bootstrap/cache
+
 # Expose port 9000 and start php-fpm server (for FastCGI Process Manager)
 EXPOSE 9093
 CMD ["php-fpm"]
