@@ -2,16 +2,29 @@ pipeline {
     agent any
  
     stages {
-        stage('Test') {
+        stage('Build') {
             steps {
                 sh 'composer install'
 
-                sh 'cp .env.example .env'
+                sh 'php --version'
+                sh 'composer install'
+                sh 'composer --version'
+              
 
                 sh 'php artisan key:generate'
 
                 sh 'php artisan config:cache'
 
+            
+            }
+        }
+           stage("Unit test") {
+            steps {
+                sh 'php artisan test'
+            }
+        }
+        stage("Code coverage") {
+            steps {
                 sh './vendor/bin/phpunit ./tests'
             }
         }
