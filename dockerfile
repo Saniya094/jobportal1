@@ -28,9 +28,11 @@ WORKDIR /var/www/html/
 # Clear cache
 # RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Install composer (php package manager)
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Install extensions for php
-RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
+# Copy existing application directory contents to the working directory
+COPY . /var/www/html
 # Expose port 9000 and start php-fpm server (for FastCGI Process Manager)
 EXPOSE 9093
 CMD ["php-fpm"]
