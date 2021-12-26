@@ -29,6 +29,8 @@ WORKDIR /var/www/html/
 # RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
+# Install extensions for php
+RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
 # Expose port 9000 and start php-fpm server (for FastCGI Process Manager)
 EXPOSE 9093
 CMD ["php-fpm"]
