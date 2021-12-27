@@ -26,7 +26,7 @@ WORKDIR /var/www/html/
      #curl
 
 # Clear cache
- RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install extensions for php
 #RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
@@ -34,10 +34,10 @@ WORKDIR /var/www/html/
 #RUN docker-php-ext-install gd
 
 # Install composer (php package manager)
-#RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Copy existing application directory contents to the working directory
-#COPY . /var/www/html
+COPY . /var/www/html
 
 # Assign permissions of the working directory to the www-data user
 #RUN chown -R www-data:www-data \
