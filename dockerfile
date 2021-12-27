@@ -45,5 +45,5 @@ COPY . /var/www/html
   #      /var/www/html/bootstrap/cache
 
 # Expose port 9000 and start php-fpm server (for FastCGI Process Manager)
-EXPOSE 9093
-CMD ["php-fpm"]
+#EXPOSE 9093
+#CMD ["php-fpm"]
