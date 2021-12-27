@@ -4,7 +4,7 @@ FROM php:7.4-fpm
 COPY composer.lock composer.json /var/www/html/
 
 # Set working directory
-WORKDIR /var/www/html/
+#WORKDIR /var/www/html/
 
 # Install dependencies for the operating system software
 # RUN apt-get update && apt-get install -y \
@@ -34,7 +34,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 #RUN docker-php-ext-install gd
 
 # Install composer (php package manager)
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+#RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Copy existing application directory contents to the working directory
 COPY . /var/www/html
